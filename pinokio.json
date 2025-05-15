@@ -1,0 +1,53 @@
+{
+  "name": "Deep Live Cam (GPU)",
+  "description": "GPU-accelerated real-time face swapper with webcam, images, or videos.",
+  "url": "https://github.com/hacksider/Deep-Live-Cam",
+  "install": [
+    {
+      "command": "python -m venv venv"
+    },
+    {
+      "command": "venv\\Scripts\\activate && pip install -r requirements.txt && pip uninstall -y onnxruntime onnxruntime-gpu && pip install onnxruntime-gpu==1.16.3",
+      "platform": "windows"
+    },
+    {
+      "command": "source venv/bin/activate && pip install -r requirements.txt && pip uninstall -y onnxruntime onnxruntime-gpu && pip install onnxruntime-gpu==1.16.3",
+      "platform": "linux"
+    },
+    {
+      "command": "source venv/bin/activate && pip install -r requirements.txt && pip uninstall -y onnxruntime onnxruntime-coreml && pip install onnxruntime-coreml==1.13.1",
+      "platform": "macos"
+    }
+  ],
+  "run": [
+    {
+      "name": "Run with GPU (CUDA)",
+      "command": "venv\\Scripts\\activate && python run.py --execution-provider cuda",
+      "platform": "windows",
+      "type": "console"
+    },
+    {
+      "name": "Run with GPU (CUDA)",
+      "command": "source venv/bin/activate && python run.py --execution-provider cuda",
+      "platform": "linux",
+      "type": "console"
+    },
+    {
+      "name": "Run with GPU (CoreML)",
+      "command": "source venv/bin/activate && python3.10 run.py --execution-provider coreml",
+      "platform": "macos",
+      "type": "console"
+    }
+  ],
+  "notes": [
+    "⚠️ After install, place the following files in the `models/` folder manually:",
+    "- GFPGANv1.4",
+    "- inswapper_128_fp16.onnx",
+    "You can find download links in the official Deep Live Cam GitHub README.",
+    "",
+    "Make sure your system meets the GPU requirements:",
+    "- CUDA 11.8 (Windows/Linux with Nvidia GPU)",
+    "- CoreML for Apple Silicon (macOS)",
+    "- DirectML or OpenVINO not currently auto-installed (manual support needed)"
+  ]
+}
